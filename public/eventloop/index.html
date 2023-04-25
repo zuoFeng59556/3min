@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noodp" />
+    <title>JavaScript 事件循环 异步 - 3分钟实验室</title><meta name="Description" content="3分钟实验室"><meta property="og:title" content="JavaScript 事件循环 异步" />
+<meta property="og:description" content="首先介绍几个概念，这里先做了解，后面用到再看。
+同步任务
+整个script脚本，除异步任务外，都是同步任务。。。
+异步任务
+包括setTimeout, setInterval, promise.then, 各种事件绑定等。
+其中异步任务又分为
+宏任务 setTimeout, setInterval, ajax请求，各种事件绑定等。 微任务promise.then 下面介绍我们运行js代码拥有哪些东西。
+js执行栈(js主线程) 运行环境(这里主要指的是浏览器) 宏任务队列 微任务队列
+如下图所示 由于js是单线程的，所以任务只能一个个执行，下面我们整理一下代码的执行流程。
+1.js代码从上往下执行，同步任务直接执行。 2.如遇到异步任务则需要判断是宏任务还是微任务，把宏任务加入到宏任务队列，微任务加入到微任务队列。 3.执行栈中任务执行完毕，js线程空闲，检查微任务队列是否有微任务，如果有则把微任务加入执行栈并执行，直到微任务队列为空。 4.当执行栈，微任务队列都为空时，检查宏任务队列是否有宏任务，如果有取第一个加入执行栈并执行，回到第一步。 简单来说就是 同步任务 &ndash;&gt; 所有微任务 &ndash;&gt; 单个宏任务 &ndash;&gt; 所有微任务 &ndash;&gt; 单个宏任务 如此循环。
+下面代码演示。 1 2 3 4 5 6 7 8 9 10 11 12 13 console.log(1); // 同步任务立马执行 setTimeout(() =&gt; { console.log(2); // 异步宏任务 放入宏任务队列 }, 0); new Promise((resolve, reject) =&gt; { resolve(); }).then(() =&gt; { console." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/eventloop/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-25T00:00:00+00:00" /><meta property="og:site_name" content="3分钟实验室" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="JavaScript 事件循环 异步"/>
+<meta name="twitter:description" content="首先介绍几个概念，这里先做了解，后面用到再看。
+同步任务
+整个script脚本，除异步任务外，都是同步任务。。。
+异步任务
+包括setTimeout, setInterval, promise.then, 各种事件绑定等。
+其中异步任务又分为
+宏任务 setTimeout, setInterval, ajax请求，各种事件绑定等。 微任务promise.then 下面介绍我们运行js代码拥有哪些东西。
+js执行栈(js主线程) 运行环境(这里主要指的是浏览器) 宏任务队列 微任务队列
+如下图所示 由于js是单线程的，所以任务只能一个个执行，下面我们整理一下代码的执行流程。
+1.js代码从上往下执行，同步任务直接执行。 2.如遇到异步任务则需要判断是宏任务还是微任务，把宏任务加入到宏任务队列，微任务加入到微任务队列。 3.执行栈中任务执行完毕，js线程空闲，检查微任务队列是否有微任务，如果有则把微任务加入执行栈并执行，直到微任务队列为空。 4.当执行栈，微任务队列都为空时，检查宏任务队列是否有宏任务，如果有取第一个加入执行栈并执行，回到第一步。 简单来说就是 同步任务 &ndash;&gt; 所有微任务 &ndash;&gt; 单个宏任务 &ndash;&gt; 所有微任务 &ndash;&gt; 单个宏任务 如此循环。
+下面代码演示。 1 2 3 4 5 6 7 8 9 10 11 12 13 console.log(1); // 同步任务立马执行 setTimeout(() =&gt; { console.log(2); // 异步宏任务 放入宏任务队列 }, 0); new Promise((resolve, reject) =&gt; { resolve(); }).then(() =&gt; { console."/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/eventloop/" /><link rel="prev" href="http://example.org/prototype/" /><link rel="next" href="http://example.org/copy/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JavaScript 事件循环 异步",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/eventloop\/"
+        },"genre": "posts","keywords": "JavaScript","wordcount":  161 ,
+        "url": "http:\/\/example.org\/eventloop\/","datePublished": "2023-04-25T00:00:00+00:00","dateModified": "2023-04-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "左风"
+            },"description": ""
+    }
+    </script></head>
+
+  <body
+    data-header-desktop="fixed"
+    data-header-mobile="auto"
+  ><script type="text/javascript">
+      (window.localStorage && localStorage.getItem("theme")
+        ? localStorage.getItem("theme") === "dark"
+        : "auto" === "auto"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : "auto" === "dark") &&
+        document.body.setAttribute("theme", "dark");
+    </script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="3分钟实验室">3分钟实验室</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/mikutap/"> 在线打碟 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="3分钟实验室">3分钟实验室</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/mikutap/" title="">在线打碟</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+        <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JavaScript 事件循环 异步</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>前端基础</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-25">2023-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 161 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>首先介绍几个概念，这里先做了解，后面用到再看。</p>
+<ul>
+<li>
+<p>同步任务<br>
+整个script脚本，除异步任务外，都是同步任务。。。</p>
+</li>
+<li>
+<p>异步任务<br>
+包括<code>setTimeout, setInterval, promise.then,</code> 各种事件绑定等。</p>
+</li>
+<li>
+<p>其中异步任务又分为</p>
+<ul>
+<li>宏任务
+<code> setTimeout, setInterval, ajax请求，</code>各种事件绑定等。</li>
+<li>微任务<code>promise.then</code></li>
+</ul>
+</li>
+</ul>
+<p>下面介绍我们运行js代码拥有哪些东西。</p>
+<ul>
+<li>js执行栈(js主线程)</li>
+<li>运行环境(这里主要指的是浏览器)</li>
+<li>宏任务队列</li>
+<li>微任务队列<br>
+如下图所示
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/Snipaste_2023-01-08_12-02-34.png"
+        data-srcset="./image/Snipaste_2023-01-08_12-02-34.png, ./image/Snipaste_2023-01-08_12-02-34.png 1.5x, ./image/Snipaste_2023-01-08_12-02-34.png 2x"
+        data-sizes="auto"
+        alt="./image/Snipaste_2023-01-08_12-02-34.png"
+        title="alt 属性文本" /></li>
+</ul>
+<p>由于js是单线程的，所以任务只能一个个执行，下面我们整理一下代码的执行流程。</p>
+<ul>
+<li>1.js代码从上往下执行，同步任务直接执行。</li>
+<li>2.如遇到异步任务则需要判断是宏任务还是微任务，把宏任务加入到宏任务队列，微任务加入到微任务队列。</li>
+<li>3.执行栈中任务执行完毕，js线程空闲，检查微任务队列是否有微任务，如果有则把微任务加入执行栈并执行，直到微任务队列为空。</li>
+<li>4.当执行栈，微任务队列都为空时，检查宏任务队列是否有宏任务，如果有取第一个加入执行栈并执行，回到第一步。</li>
+<li>简单来说就是  同步任务 &ndash;&gt; 所有微任务 &ndash;&gt; 单个宏任务 &ndash;&gt; 所有微任务 &ndash;&gt; 单个宏任务 如此循环。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/Snipaste_2023-01-08_13-57-55.png"
+        data-srcset="./image/Snipaste_2023-01-08_13-57-55.png, ./image/Snipaste_2023-01-08_13-57-55.png 1.5x, ./image/Snipaste_2023-01-08_13-57-55.png 2x"
+        data-sizes="auto"
+        alt="./image/Snipaste_2023-01-08_13-57-55.png"
+        title="alt 属性文本" />
+下面代码演示。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 同步任务立马执行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 异步宏任务 放入宏任务队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 异步微任务 放入微任务队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 同步任务立马执行
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>打印结果为 <code>1 4 3 2 </code> <br>
+::: tip
+这里需要注意：只要执行栈为空，就会把微任务队列的所有任务处理完。而宏任务则是一个一个的处理。这样做的目的是可以实现插队。<br>
+:::
+下面看代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 同步任务立马执行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 异步宏任务 放入宏任务队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">      <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">resolve</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 异步微任务 放入微任务队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 同步任务立马执行
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>打印结果是 <code>1 5 2 3 4</code>。<br>
+这里我们可以看到 宏任务队列有两个任务 分别是打印 2 和打印 4，但是因为打印 2 这个宏任务中又产生了打印 3 的微任务。按照事件循环机制，执行完一个宏任务后会清空微任务队列，所以先打印了3。<br>
+这样我们就利用了微任务进行插队。</p>
+<p>最后我们解释一下运行环境的作用，当我们设置<code>setTimeout</code>的时候js线程并不会去计时，而是在运行环境中创建一个任务，这个任务就是计时对应的时间后把回调函数放入相应的任务队列。
+那么由此可知，<code>setTimeout</code>定时的任务并不一定会准时执行，而是最快那个时间执行。</p>
+<ul>
+<li>下图解释了浏览器的进程。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/111.png"
+        data-srcset="./image/111.png, ./image/111.png 1.5x, ./image/111.png 2x"
+        data-sizes="auto"
+        alt="./image/111.png"
+        title="alt 属性文本" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/222.png"
+        data-srcset="./image/222.png, ./image/222.png 1.5x, ./image/222.png 2x"
+        data-sizes="auto"
+        alt="./image/222.png"
+        title="alt 属性文本" /></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/javascript/">JavaScript</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/prototype/" class="prev" rel="prev" title="JavaScript 原型 原型链"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>JavaScript 原型 原型链</a>
+            <a href="/copy/" class="next" rel="next" title="JavaScript 深浅拷贝">JavaScript 深浅拷贝<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+      </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">左风</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a
+        href="#"
+        id="back-to-top"
+        class="fixed-button"
+        title="回到顶部"
+      >
+        <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+      </a><a
+        href="#"
+        id="view-comments"
+        class="fixed-button"
+        title="查看评论"
+      >
+        <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+      </a>
+    </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+  
+  <script src="https://cdn.jsdelivr.net/gh/ZhaoUncle/image@main/static/mouse-click.js"></script>
+  <canvas
+    width="1777"
+    height="841"
+    style="
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 2147483647;
+      pointer-events: none;
+    "
+  ></canvas>
+</html>

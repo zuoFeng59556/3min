@@ -66,7 +66,14 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     name = "分类"
     url = "/categories/"
     title = ""
-
+  [[menu.main]]
+    weight = 4
+    identifier = "mikutap"
+    pre = ""
+    post = ""
+    name = "在线打碟"
+    url = "/mikutap/"
+    title = ""
 [params]
   # 网站默认主题样式 ["auto", "light", "dark"]
   defaultTheme = "auto"

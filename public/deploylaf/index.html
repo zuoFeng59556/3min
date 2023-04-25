@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noodp" />
+    <title>三分钟部署 laf (win 版本) - 3分钟实验室</title><meta name="Description" content="3分钟实验室"><meta property="og:title" content="三分钟部署 laf (win 版本)" />
+<meta property="og:description" content="起步 演示系统： win11专业版（这里一定是专业版，家庭版的同学去某宝花几块钱升级一下）
+首先我们需要用到一个工具 Multipass。
+Multipass 是快速创建一个 linux 虚拟机的工具。 我们创建 linux 虚拟机干啥呢？用来部署 k8s 。 什么是 k8s ？ 简单理解就是可以把多台服务器，组成一个超级机器，一起来管理的一个平台。 部署k8s干啥？ 因为 laf 当前只支持在 k8s 上部署。 我们反过来说： laf 当前只支持在 k8s 上部署， k8s 只支持 linux ,而我们只有一个 windows 系统。
+安装 Multipass 点击这里安装 Multipass win 版本。
+一路选择下一步安装，这个地方需要注意的是一定要选这个，如果这个选项是黑的证明你的系统不是专业版。 安装完毕之后，重启电脑。
+重启完执行命令。
+1 2 // 启动 laf-dev 虚拟器 分配 cpus 2 memory 4G disk 50G multipass launch --name laf-dev --cpus 2 --memory 4G --disk 50G :::tip 如果遇到 launch failed: Remote &quot;&quot; is unknown or unreachable." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/deploylaf/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-25T00:00:00+00:00" /><meta property="og:site_name" content="3分钟实验室" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="三分钟部署 laf (win 版本)"/>
+<meta name="twitter:description" content="起步 演示系统： win11专业版（这里一定是专业版，家庭版的同学去某宝花几块钱升级一下）
+首先我们需要用到一个工具 Multipass。
+Multipass 是快速创建一个 linux 虚拟机的工具。 我们创建 linux 虚拟机干啥呢？用来部署 k8s 。 什么是 k8s ？ 简单理解就是可以把多台服务器，组成一个超级机器，一起来管理的一个平台。 部署k8s干啥？ 因为 laf 当前只支持在 k8s 上部署。 我们反过来说： laf 当前只支持在 k8s 上部署， k8s 只支持 linux ,而我们只有一个 windows 系统。
+安装 Multipass 点击这里安装 Multipass win 版本。
+一路选择下一步安装，这个地方需要注意的是一定要选这个，如果这个选项是黑的证明你的系统不是专业版。 安装完毕之后，重启电脑。
+重启完执行命令。
+1 2 // 启动 laf-dev 虚拟器 分配 cpus 2 memory 4G disk 50G multipass launch --name laf-dev --cpus 2 --memory 4G --disk 50G :::tip 如果遇到 launch failed: Remote &quot;&quot; is unknown or unreachable."/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/deploylaf/" /><link rel="prev" href="http://example.org/next/" /><link rel="next" href="http://example.org/lafguide/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "三分钟部署 laf (win 版本)",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/deploylaf\/"
+        },"genre": "posts","keywords": "Laf","wordcount":  196 ,
+        "url": "http:\/\/example.org\/deploylaf\/","datePublished": "2023-04-25T00:00:00+00:00","dateModified": "2023-04-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "左风"
+            },"description": ""
+    }
+    </script></head>
+
+  <body
+    data-header-desktop="fixed"
+    data-header-mobile="auto"
+  ><script type="text/javascript">
+      (window.localStorage && localStorage.getItem("theme")
+        ? localStorage.getItem("theme") === "dark"
+        : "auto" === "auto"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : "auto" === "dark") &&
+        document.body.setAttribute("theme", "dark");
+    </script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="3分钟实验室">3分钟实验室</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/mikutap/"> 在线打碟 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="3分钟实验室">3分钟实验室</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/mikutap/" title="">在线打碟</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+        <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">三分钟部署 laf (win 版本)</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/laf-%E6%95%99%E7%A8%8B/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Laf 教程</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-25">2023-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 196 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#起步">起步</a></li>
+    <li><a href="#安装-multipass">安装 Multipass</a></li>
+    <li><a href="#alt-属性文本image9png">直到你看到这个界面，就部署成功啦
+<img src="./image/9.png" alt="alt 属性文本"></a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="起步">起步</h2>
+<p>演示系统： win11专业版（这里一定是专业版，家庭版的同学去某宝花几块钱升级一下）</p>
+<p>首先我们需要用到一个工具 Multipass。</p>
+<ul>
+<li><code>Multipass</code> 是快速创建一个 <code>linux</code> 虚拟机的工具。</li>
+<li>我们创建 <code>linux</code> 虚拟机干啥呢？用来部署 <code>k8s</code> 。</li>
+<li>什么是 <code>k8s</code> ？ 简单理解就是可以把多台服务器，组成一个超级机器，一起来管理的一个平台。</li>
+<li>部署k8s干啥？ 因为 <code>laf</code> 当前只支持在 <code>k8s</code> 上部署。</li>
+<li>我们反过来说： <code>laf</code> 当前只支持在 <code>k8s</code> 上部署， <code>k8s</code> 只支持 <code>linux</code> ,而我们只有一个 <code>windows</code> 系统。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/1.png"
+        data-srcset="./image/1.png, ./image/1.png 1.5x, ./image/1.png 2x"
+        data-sizes="auto"
+        alt="./image/1.png"
+        title="alt 属性文本" /></li>
+</ul>
+<h2 id="安装-multipass">安装 Multipass</h2>
+<p>点击<a href="https://multipass.run/install" target="_blank" rel="noopener noreffer ">这里</a>安装 Multipass win 版本。<br>
+一路选择<code>下一步</code>安装，这个地方需要注意的是一定要选这个，如果这个选项是黑的证明你的系统不是<code>专业版</code>。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/2.png"
+        data-srcset="./image/2.png, ./image/2.png 1.5x, ./image/2.png 2x"
+        data-sizes="auto"
+        alt="./image/2.png"
+        title="alt 属性文本" /><br>
+安装完毕之后，重启电脑。<br>
+重启完执行命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 启动 laf-dev 虚拟器 分配 cpus 2 memory 4G disk 50G
+</span></span><span class="line"><span class="cl">multipass launch --name laf-dev --cpus 2 --memory 4G --disk 50G
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>:::tip
+如果遇到 launch failed: Remote &quot;&quot; is unknown or unreachable.
+请更换网络，我是用手机开热点解决的，大约会消耗800MB流量。
+:::
+等待
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/3.png"
+        data-srcset="./image/3.png, ./image/3.png 1.5x, ./image/3.png 2x"
+        data-sizes="auto"
+        alt="./image/3.png"
+        title="alt 属性文本" /><br>
+看到以下提示代表完成，这里的意思是由于禁止挂载跳过了挂载。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/4.png"
+        data-srcset="./image/4.png, ./image/4.png 1.5x, ./image/4.png 2x"
+        data-sizes="auto"
+        alt="./image/4.png"
+        title="alt 属性文本" /><br>
+我们手动开启</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">multipass set local.privileged-mounts=true
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>挂载 laf</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 这里的 D:\WorkSpace\laf 是我电脑上的 laf 项目绝对地址，需要更换成你自己的
+</span></span><span class="line"><span class="cl">// 如果你还没有，先去 GitHub 上 clone 
+</span></span><span class="line"><span class="cl">multipass mount D:\WorkSpace\laf laf-dev:/laf/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行完之后需要打开 laf 项目找到 deploy/scripts/install-on-linux.sh 文件把 <code>CRLF</code> 改成 <code>LF</code> 后保存。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/5.png"
+        data-srcset="./image/5.png, ./image/5.png 1.5x, ./image/5.png 2x"
+        data-sizes="auto"
+        alt="./image/5.png"
+        title="alt 属性文本" /><br>
+改完后执行命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 获取到我们开启的虚拟机ip
+</span></span><span class="line"><span class="cl">multipass info laf-dev | Where-Object{$_ -match &#34;IPv4&#34;} | ForEach-Object{ ($_ -split &#34;\s+&#34;)[1] }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行完后会出现一个 ip 地址
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/6.png"
+        data-srcset="./image/6.png, ./image/6.png 1.5x, ./image/6.png 2x"
+        data-sizes="auto"
+        alt="./image/6.png"
+        title="alt 属性文本" /><br>
+复制下来放在这条命令里面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">multipass exec laf-dev -- sudo -u root sh /laf/deploy/scripts/install-on-linux.sh 放在这里.nip.io
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/7.png"
+        data-srcset="./image/7.png, ./image/7.png 1.5x, ./image/7.png 2x"
+        data-sizes="auto"
+        alt="./image/7.png"
+        title="alt 属性文本" /><br>
+网速太慢，待续。。。</p>
+<hr>
+<p>如果你也和我一样下载特别慢，可以将以下代码添加到 <code>install-on-linux.sh</code> 文件中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mkdir /etc/containers/
+</span></span><span class="line"><span class="cl">cat &gt;/etc/containers/registries.conf &lt;&lt;EOF
+</span></span><span class="line"><span class="cl">unqualified-search-registries = [&#34;docker.io&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[[registry]]
+</span></span><span class="line"><span class="cl">prefix = &#34;docker.io&#34;
+</span></span><span class="line"><span class="cl">location = &#34;dockerproxy.com&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/8.png"
+        data-srcset="./image/8.png, ./image/8.png 1.5x, ./image/8.png 2x"
+        data-sizes="auto"
+        alt="./image/8.png"
+        title="alt 属性文本" /><br>
+保存后重新运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 别忘了更换ip地址
+</span></span><span class="line"><span class="cl">multipass exec laf-dev -- sudo -u root sh /laf/deploy/scripts/install-on-linux.sh 放在这里.nip.io
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="alt-属性文本image9png">直到你看到这个界面，就部署成功啦
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/9.png"
+        data-srcset="./image/9.png, ./image/9.png 1.5x, ./image/9.png 2x"
+        data-sizes="auto"
+        alt="./image/9.png"
+        title="alt 属性文本" /></h2>
+<blockquote>
+<p>如果本文对你有帮助，可以去 Github 给我的博客点个 star 嘛 <br>
+<strong><a href="https://github.com/zuoFeng59556/my-blog" target="_blank" rel="noopener noreffer ">https://github.com/zuoFeng59556/my-blog</a></strong></p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/laf/">Laf</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/next/" class="prev" rel="prev" title="三分钟上手 Next.js"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>三分钟上手 Next.js</a>
+            <a href="/lafguide/" class="next" rel="next" title="Laf 开发指南">Laf 开发指南<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+      </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">左风</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a
+        href="#"
+        id="back-to-top"
+        class="fixed-button"
+        title="回到顶部"
+      >
+        <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+      </a><a
+        href="#"
+        id="view-comments"
+        class="fixed-button"
+        title="查看评论"
+      >
+        <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+      </a>
+    </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+  
+  <script src="https://cdn.jsdelivr.net/gh/ZhaoUncle/image@main/static/mouse-click.js"></script>
+  <canvas
+    width="1777"
+    height="841"
+    style="
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 2147483647;
+      pointer-events: none;
+    "
+  ></canvas>
+</html>

@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>工具 - 分类 - 3分钟实验室</title>
+        <link>http://example.org/categories/%E5%B7%A5%E5%85%B7/</link>
+        <description>工具 - 分类 - 3分钟实验室</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/categories/%E5%B7%A5%E5%85%B7/" rel="self" type="application/rss+xml" /><item>
+    <title>三分钟学会参与开源，提交 PR</title>
+    <link>http://example.org/pr/</link>
+    <pubDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</pubDate>
+    <author>左风</author>
+    <guid>http://example.org/pr/</guid>
+    <description><![CDATA[三分钟学会参与开源，提交 pr pr 是什么 假设：
+你在 GitHub 上发现了一个开源项目。 觉得项目中有 bug,或者写的不够好。 你想出手帮帮他。 这个时候就会用到 pr (pull request)。 这里翻译为： 我改了你的代码，你快来看看把！ 项目克隆到本地 首先找到一个项目，点击右上角的 Fork 按钮，把项目复制一份到自己的 GitHub。
+Fork 完之后我们到自己的仓库列表，找到刚刚复制的仓库，并 clone 到自己本地。 :::tip 这里要注意，一定是 clone 自己复制的那一份哦，而不是原仓库，没有人会让你直接更改别人代码的。 :::
+在正式改代码之前我们还需要了解一下仓库的关系。
+我们现在拥有三份代码，称为三个仓库。
+原作者 GitHub 上的仓库称为 upstream Fork 复制到我们自己 GitHub 上的称为 origin 从我们自己 GitHub 上 clone 到本地的称为 local 在我们项目目录下执行 git remote -v 发现只有origin仓库。 这里用 git remote add upstream 原仓库地址 来添加upstream仓库。 再次 git remote -v 查看添加成功。 至此，我们三个仓库就都关联上了。
+改代码 改别人代码之前我们还需要做一件事情，那就是基于 upstream 仓库创建一个新的分支。]]></description>
+</item>
+</channel>
+</rss>

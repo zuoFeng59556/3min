@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noodp" />
+    <title>JavaScript 原型 原型链 - 3分钟实验室</title><meta name="Description" content="3分钟实验室"><meta property="og:title" content="JavaScript 原型 原型链" />
+<meta property="og:description" content="构造函数 了解原型之前我们需要明白另外一件事情，什么是构造函数。
+function student(){} 这是一个函数,我们可以直接调用它student()因为它的函数体是空的,所以不会执行任何操作。
+但我们还有另外一种办法调用它 那就是new let a = new student()这句代码意思是 创建一个 student 类型的对象 a 把student()函数当构造函数使用。
+其实所有的函数只要使用new来调用都是构造函数，反过来说构造函数和函数的区别就是是否用new来调用。
+1 2 3 4 function student() {} let a = new student(); console.log(a); //student {} console.log(a instanceof student); //true 下面我们给出一个稍微标准点的构造函数。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 function student(name, age) { this.name = name; this.age = age; this.sayName = function () { console." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/prototype/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-25T00:00:00+00:00" /><meta property="og:site_name" content="3分钟实验室" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="JavaScript 原型 原型链"/>
+<meta name="twitter:description" content="构造函数 了解原型之前我们需要明白另外一件事情，什么是构造函数。
+function student(){} 这是一个函数,我们可以直接调用它student()因为它的函数体是空的,所以不会执行任何操作。
+但我们还有另外一种办法调用它 那就是new let a = new student()这句代码意思是 创建一个 student 类型的对象 a 把student()函数当构造函数使用。
+其实所有的函数只要使用new来调用都是构造函数，反过来说构造函数和函数的区别就是是否用new来调用。
+1 2 3 4 function student() {} let a = new student(); console.log(a); //student {} console.log(a instanceof student); //true 下面我们给出一个稍微标准点的构造函数。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 function student(name, age) { this.name = name; this.age = age; this.sayName = function () { console."/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/prototype/" /><link rel="prev" href="http://example.org/lafguide/" /><link rel="next" href="http://example.org/eventloop/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JavaScript 原型 原型链",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/prototype\/"
+        },"genre": "posts","keywords": "JavaScript","wordcount":  479 ,
+        "url": "http:\/\/example.org\/prototype\/","datePublished": "2023-04-25T00:00:00+00:00","dateModified": "2023-04-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "左风"
+            },"description": ""
+    }
+    </script></head>
+
+  <body
+    data-header-desktop="fixed"
+    data-header-mobile="auto"
+  ><script type="text/javascript">
+      (window.localStorage && localStorage.getItem("theme")
+        ? localStorage.getItem("theme") === "dark"
+        : "auto" === "auto"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : "auto" === "dark") &&
+        document.body.setAttribute("theme", "dark");
+    </script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="3分钟实验室">3分钟实验室</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/mikutap/"> 在线打碟 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="3分钟实验室">3分钟实验室</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/mikutap/" title="">在线打碟</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+        <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JavaScript 原型 原型链</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>前端基础</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-25">2023-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 479 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#构造函数">构造函数</a></li>
+    <li><a href="#构造函数的原型">构造函数的原型</a></li>
+    <li><a href="#实例的原型">实例的原型</a></li>
+    <li><a href="#原型的作用">原型的作用</a></li>
+    <li><a href="#原型链">原型链</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="构造函数">构造函数</h2>
+<p>了解原型之前我们需要明白另外一件事情，什么是构造函数。<br>
+<code>function student(){}</code> 这是一个函数,我们可以直接调用它<code>student()</code>因为它的函数体是空的,所以不会执行任何操作。<br>
+但我们还有另外一种办法调用它 那就是<code>new let a = new student()</code>这句代码意思是 创建一个 <code>student</code> 类型的对象 <code>a</code> 把<code>student()</code>函数当构造函数使用。<br>
+其实所有的函数只要使用<code>new</code>来调用都是构造函数，反过来说构造函数和函数的区别就是是否用<code>new</code>来调用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">//student {}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span> <span class="k">instanceof</span> <span class="nx">student</span><span class="p">);</span> <span class="c1">//true
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面我们给出一个稍微标准点的构造函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">(</span><span class="s2">&#34;小红&#34;</span><span class="p">,</span> <span class="s2">&#34;18&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">(</span><span class="s2">&#34;小明&#34;</span><span class="p">,</span> <span class="s2">&#34;20&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// 小红
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">a</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span> <span class="c1">// 小红
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// 小明
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">b</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span> <span class="c1">// 小明
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">===</span> <span class="nx">b</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span> <span class="c1">//false
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里我们通过构造函数实例化了两个对象<code>a</code>和<code>b</code>,但是请注意最后一行，<code>a.sayName</code>和<code>b.sayName</code>并不是同一个函数，这代表需要在内存中存放两个同样的<code>sayName</code>函数，如果我实例化一百个对象，那么就需要存放一百个同样的函数在内存中，这显然是不好的，后面我们会通过原型来优化这个“不好”的构造函数。</p>
+<h2 id="构造函数的原型">构造函数的原型</h2>
+<p>每个函数创建时js就会为这个函数创建一个<code>prototype</code>属性，这个属性是一个对象，也就是我们说的原型（原型对象）。<br>
+默认情况下原型对象会自动获得一个<code>constructor</code>属性,指回与之关联的构造函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span><span class="c1">// {constructor: ƒ student()}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">student</span><span class="p">);</span> <span class="c1">//true
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在我们知道了，每个函数都有一个原型（原型对象），其中默认包括一个<code>constructor</code>属性，而这个属性指向关联的构造函数，可以理解为 函数的 原型对象 里面的<code>constructor</code>属性 指向它自己。</p>
+<h2 id="实例的原型">实例的原型</h2>
+<p>除了构造函数之外，被构造函数<code>new</code>出来的实例也是有原型对象的，在chrome浏览器中可以通过<code>__proto__</code>属性来访问。（注意proto前面和后面是两个下划线）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span><span class="c1">// {constructor: ƒ student()}
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里我们发现<code>实例</code>的原型和<code>构造函数</code>的原型看起来一样，我们不妨测试一下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span> <span class="c1">// true
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其实<code>实例</code>的原型就是从他的<code>构造函数</code>那里得来的，所以得出结论;<br>
+1.构造函数有一个原型。<br>
+2.原型中有一个<code>constructor</code>属性，指向构造函数本身。<br>
+3.实例的原型是从构造函数得到的，实例的原型===构造函数的原型。</p>
+<h2 id="原型的作用">原型的作用</h2>
+<p>我们已经知道原型是一个对象，有一个默认的<code>constructor</code>属性，那么如果给原型对象新增一些属性呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;小红&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="s2">&#34;18&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span><span class="c1">// {name:&#39;小红&#39;,age:&#39;18&#39;,sayName: ƒ (), constructor: ƒ student()}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span><span class="c1">// 小红
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，成功添加并且可以使用，下面我们来创建一个实例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;小红&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="s2">&#34;18&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// 小红
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">a</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span><span class="c1">// 小红
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里发现一个问题，我们实例化一个对象<code>a</code>但是我们并没有给<code>a</code>赋任何属性，但是我们访问<code>a.name</code>和<code>a.sayName()</code>，却能正常访问，输出的值刚好是原型中对应的值，why?<br>
+因为通过对象访问属性时，会首先搜索<code>对象本身</code>有没有这个属性，如果有则返回，如果没有则去搜索对象的<code>原型</code>有没有这个属性。<br>
+因此调用<code>a.name</code>会发生两步搜索。<br>
+第一步js引擎会问 对象<code>a</code>有<code>name</code>这个属性吗？ 答案是没有。<br>
+第二步js引擎会问 对象<code>a</code>的原型有<code>name</code>这个属性吗？ 答案是有，返回原型的<code>name</code>属性。<br>
+调用<code>a.sayName()</code>时会发生同样的搜索。</p>
+<p>还记得我们那个“不好”的构造函数吗？我们现在利用原型来改造一下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">(</span><span class="s2">&#34;小红&#34;</span><span class="p">,</span> <span class="s2">&#34;18&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">(</span><span class="s2">&#34;小明&#34;</span><span class="p">,</span> <span class="s2">&#34;20&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">a</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span> <span class="c1">// 小红
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">b</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span> <span class="c1">// 小明
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">===</span> <span class="nx">b</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span> <span class="c1">//true
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>问题顺利解决，不管创建多个对象，<code>sayName</code>这个函数也只需要在内存中存储一次了。<br>
+这里我们简单理解一下“原型”的意思，原型 就是构造函数实例化对象的模型。</p>
+<p>如果我们想知道一个属性到底是属于原型，还是对象本身，我们可以这样做。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">student</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">student</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="s2">&#34;18&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">student</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">a</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34; 小红&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;name&#34;</span> <span class="k">in</span> <span class="nx">a</span><span class="p">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;age&#34;</span> <span class="k">in</span> <span class="nx">a</span><span class="p">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">));</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">&#34;age&#34;</span><span class="p">));</span> <span class="c1">//false
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>in</code>操作符判断属性时会包括原型的属性，也就是说在对象本身和原型上只要能找到就会返回<code>true</code>，而<code>hasOwnProperty()</code>只有在属性属于自身时才会返回<code>true</code>。</p>
+<h2 id="原型链">原型链</h2>
+<p>现在回顾一下上面所说的知识；<br>
+1.构造函数有一个原型，默认有一个属性<code>constructor</code>指向构造函数本身。<br>
+2.实例有一个属性<code>__proto__</code>指向构造函数的原型。<br>
+那如果一个构造函数的原型是一个实例呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">grandfather</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;小明&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">grandfather</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">father</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">father</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">grandfather</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">father</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getName</span><span class="p">();</span> <span class="c1">// 小明
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在父亲函数的原型是爷爷函数的实例，这代表通过父亲的原型对象可以访问到爷爷的<code>getName</code>方法。
+我们用父亲函数实例化一个对象，这样就简单的实现了继承。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">grandfather</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;小明&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">grandfather</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">father</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">father</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">grandfather</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">son</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">father</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">son</span><span class="p">.</span><span class="nx">getName</span><span class="p">();</span> <span class="c1">// 小明
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其实所有函数的原型都是<code>Object</code>的实例，所以原型链的尽头就是<code>Object</code>,<code>Object</code>的原型是<code>null</code>。<br>
+下面我们来感受一下原型链。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">grandfather</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">father</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">father</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">grandfather</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">son</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">father</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">son</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">father</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">son</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">grandfather</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">son</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">son</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="kc">null</span><span class="p">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>::: tip
+这里补充说明一下，访问一个对象的属性时会优先搜索对象本身，然后搜索他的原型，然后是他原型的原型，按着原型链一直搜索到<code>Object</code>的原型为止。
+:::</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/javascript/">JavaScript</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/lafguide/" class="prev" rel="prev" title="Laf 开发指南"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Laf 开发指南</a>
+            <a href="/eventloop/" class="next" rel="next" title="JavaScript 事件循环 异步">JavaScript 事件循环 异步<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+      </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">左风</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a
+        href="#"
+        id="back-to-top"
+        class="fixed-button"
+        title="回到顶部"
+      >
+        <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+      </a><a
+        href="#"
+        id="view-comments"
+        class="fixed-button"
+        title="查看评论"
+      >
+        <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+      </a>
+    </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+  
+  <script src="https://cdn.jsdelivr.net/gh/ZhaoUncle/image@main/static/mouse-click.js"></script>
+  <canvas
+    width="1777"
+    height="841"
+    style="
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 2147483647;
+      pointer-events: none;
+    "
+  ></canvas>
+</html>

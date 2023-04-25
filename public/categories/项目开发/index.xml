@@ -1,0 +1,31 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>项目开发 - 分类 - 3分钟实验室</title>
+        <link>http://example.org/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</link>
+        <description>项目开发 - 分类 - 3分钟实验室</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
+    <title>三分钟拥有自己的 ChatGPT (从开发到上线) </title>
+    <link>http://example.org/chatgpt/</link>
+    <pubDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</pubDate>
+    <author>左风</author>
+    <guid>http://example.org/chatgpt/</guid>
+    <description><![CDATA[OpenAI 已经公布了 ChatGPT 正式版 API，背后的新模型是 gpt-3.5-turbo，这是 OpenAI 目前最先进的模型，响应速度更快，价格更便宜。
+作为开发人员，我们还是希望通过 API 将 ChatGPT 和相关模型集成到自己的产品和应用中，尴尬的是，目前无法访问 ChatGPT API，原因大家都懂得。于是网上出现了各种各样的 API 反代服务，我们可以直接通过反代服务来变相访问 ChatGPT API。
+即使我们解决了 API 的访问问题，还要准备一个开发环境，比如对于 Node.js 客户端来说，需要准备一个 Node.js 环境。
+有没有一种简单快捷的方法来调用 ChatGPT API 呢？
+那当然是用 Laf 了。
+Laf 是一个完全开源的一站式云开发平台，提供了开箱即用的云函数，云数据库，对象存储等能力，让你可以像写博客一样写代码。
+GitHub：https://github.com/labring/laf
+如果你希望快速了解 Laf 的用法，可以参考这篇文章：三分钟学会 Laf。
+言归正传，下面我们开始计时，三分钟时间用 Laf 实现一个自己的 ChatGPT！
+前提条件：你需要准备一个 ChatGPT 账号并且生成一个 API Key (这一步可以问 Google )
+云函数教学 首先需要登录 laf.dev，然后新建一个应用。
+点击开发按钮进入开发页面。
+在 NPM 依赖面板中点击右上角的 +：
+然后输入 chatgpt 并回车进行搜索，选择第一个搜索结果，保存并重启：
+重启之后，自定义依赖项中便出现了 chatgpt。
+然后就可以像我一样新建一个云函数名字叫 send，并写入以下内容：
+1 2 3 4 5 6 7 8 9 10 import cloud from &#39;@lafjs/cloud&#39; export async function main(ctx: FunctionContext) { const { ChatGPTAPI } = await import(&#39;chatgpt&#39;) const api = new ChatGPTAPI({ apiKey: cloud.]]></description>
+</item>
+</channel>
+</rss>

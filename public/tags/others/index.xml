@@ -4,12 +4,20 @@
         <link>http://example.org/tags/others/</link>
         <description>others - 标签 - 3分钟实验室</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/others/" rel="self" type="application/rss+xml" /><item>
-    <title>我的第一篇文章</title>
-    <link>http://example.org/first_post/</link>
+    <title>三分钟写了一个专属 ChatGPT ，Laf 创始人：明天来上班！</title>
+    <link>http://example.org/offer/</link>
     <pubDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</pubDate>
     <author>左风</author>
-    <guid>http://example.org/first_post/</guid>
-    <description><![CDATA[第一步 第二部 第三部 ]]></description>
+    <guid>http://example.org/offer/</guid>
+    <description><![CDATA[起因 故事是这样的，一个月黑风高的夜晚，我掏出手机像往常一样打开朋友圈。 一开始我是不相信的，直到我（快速的） &ndash;&gt; 打开 laf &ndash;&gt; 创建应用 &ndash;&gt; 新建云函数 &ndash;&gt; 写上三行代码 &ndash;&gt; 点击运行，呦呵！还真通了。
+然后我又（快速的）&ndash;&gt; 新建前端项目 &ndash;&gt; 写点样式 &ndash;&gt; 接入laf &ndash;&gt; 写点逻辑 &ndash;&gt; 打包项目 &ndash;&gt; 上传到 laf 托管，获得一个线上的地址：https://jyf6wk-chat-gpt.site.laf.dev/
+随便问两句试试看。
+不得了不得了，赶紧发给我的朋友们装个杯。
+再顺手发到大型 同性交友群 技术交流群。
+契机 没多大会，一个 基友 米开朗基杨加我好友。
+我一想博客也很久没更新了（主要是他叫了我一声大佬），就顺便写一篇吧，然后我（迅速又帅气的）取出我的 68键，拾光白轴，PBT豆奶键帽的键盘，行云流水的码完了一篇文章：三分钟拥有自己的 ChatGPT (从开发到上线)
+这篇文章经过 米开朗基杨 的润色之后几番转载， laf 一天增加了上百个 star，四百多应用，直接送上 Github Trending。 转折 然后，然后重点来了。
+THE END life is short, you need laf 😃 https://laf.dev/]]></description>
 </item>
 </channel>
 </rss>

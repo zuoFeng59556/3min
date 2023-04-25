@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noodp" />
+    <title>Laf 开发指南 - 3分钟实验室</title><meta name="Description" content="3分钟实验室"><meta property="og:title" content="Laf 开发指南" />
+<meta property="og:description" content="Laf 开发指南（比官方文档更详细）待更新 laf 金丝雀版本已经不删档上线了，作为一个使用 laf 多年的开发者，毕业设计我都是用 laf 写的&hellip; 我深知 laf 对于前端程序员意味着什么，通过简单的学习就可以进行全栈开发 部署，带来了极致的开发体验，脏活累活 laf 都帮我们解决了，用 laf 甚至可以延年益寿&hellip;
+本文我根据 laf 功能模块来一一介绍，可以顺序阅读，也可以根据右边导航栏找到需要了解的模块。
+如果你还不知道 laf 是什么 参考：三分钟学会 Laf
+:::tip 因本文图片较多，打开设备的夜间模式，或者点击本站右上角的夜间模式开关，获得最佳阅读体验。
+部分图片看不清细节，PC 端 CTRL &#43; 鼠标滚轮 放大，移动端双指放大。 :::
+云函数基本功能 云函数是 laf 最重要的功能了，所以我们就从新建一个云函数开始。 进入到 laf 开发页面我们可以点击中间的立即创建和左上角的 &#43; 符号来创建一个云函数。 参考下图的介绍来创建你的第一个云函数吧
+创建完之后我们熟悉一下关于云函数都有哪些功能。
+搜索 编辑 删除 编写 发布 查看 传参 调试 依赖 控制台 运行结果 集合基本功能 集合我们可以理解为数据库，每一个集合对应的就是一张表。
+和创建云函数一样，我们来创建一个集合。 添加一条数据 编辑 查询 删除 存储基本功能 存储这里就是存放我们文件的地方，首先我们创建一个 bucket 上传 网站托管 日志基本功能 日志就是我们云函数的执行日志，我们回到最初创建的 get-data 函数，写入以下代码，并点击右侧的运行按钮。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/lafguide/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-25T00:00:00+00:00" /><meta property="og:site_name" content="3分钟实验室" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="Laf 开发指南"/>
+<meta name="twitter:description" content="Laf 开发指南（比官方文档更详细）待更新 laf 金丝雀版本已经不删档上线了，作为一个使用 laf 多年的开发者，毕业设计我都是用 laf 写的&hellip; 我深知 laf 对于前端程序员意味着什么，通过简单的学习就可以进行全栈开发 部署，带来了极致的开发体验，脏活累活 laf 都帮我们解决了，用 laf 甚至可以延年益寿&hellip;
+本文我根据 laf 功能模块来一一介绍，可以顺序阅读，也可以根据右边导航栏找到需要了解的模块。
+如果你还不知道 laf 是什么 参考：三分钟学会 Laf
+:::tip 因本文图片较多，打开设备的夜间模式，或者点击本站右上角的夜间模式开关，获得最佳阅读体验。
+部分图片看不清细节，PC 端 CTRL &#43; 鼠标滚轮 放大，移动端双指放大。 :::
+云函数基本功能 云函数是 laf 最重要的功能了，所以我们就从新建一个云函数开始。 进入到 laf 开发页面我们可以点击中间的立即创建和左上角的 &#43; 符号来创建一个云函数。 参考下图的介绍来创建你的第一个云函数吧
+创建完之后我们熟悉一下关于云函数都有哪些功能。
+搜索 编辑 删除 编写 发布 查看 传参 调试 依赖 控制台 运行结果 集合基本功能 集合我们可以理解为数据库，每一个集合对应的就是一张表。
+和创建云函数一样，我们来创建一个集合。 添加一条数据 编辑 查询 删除 存储基本功能 存储这里就是存放我们文件的地方，首先我们创建一个 bucket 上传 网站托管 日志基本功能 日志就是我们云函数的执行日志，我们回到最初创建的 get-data 函数，写入以下代码，并点击右侧的运行按钮。"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/lafguide/" /><link rel="prev" href="http://example.org/deploylaf/" /><link rel="next" href="http://example.org/prototype/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Laf 开发指南",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/lafguide\/"
+        },"genre": "posts","keywords": "Laf","wordcount":  120 ,
+        "url": "http:\/\/example.org\/lafguide\/","datePublished": "2023-04-25T00:00:00+00:00","dateModified": "2023-04-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "左风"
+            },"description": ""
+    }
+    </script></head>
+
+  <body
+    data-header-desktop="fixed"
+    data-header-mobile="auto"
+  ><script type="text/javascript">
+      (window.localStorage && localStorage.getItem("theme")
+        ? localStorage.getItem("theme") === "dark"
+        : "auto" === "auto"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : "auto" === "dark") &&
+        document.body.setAttribute("theme", "dark");
+    </script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="3分钟实验室">3分钟实验室</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/mikutap/"> 在线打碟 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="3分钟实验室">3分钟实验室</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/mikutap/" title="">在线打碟</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+        <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Laf 开发指南</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/laf-%E6%95%99%E7%A8%8B/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Laf 教程</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-25">2023-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 120 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#云函数基本功能">云函数基本功能</a>
+      <ul>
+        <li><a href="#搜索-编辑-删除">搜索 编辑 删除</a></li>
+        <li><a href="#编写-发布-查看">编写 发布 查看</a></li>
+        <li><a href="#传参-调试">传参 调试</a></li>
+        <li><a href="#依赖-控制台-运行结果">依赖 控制台 运行结果</a></li>
+      </ul>
+    </li>
+    <li><a href="#集合基本功能">集合基本功能</a>
+      <ul>
+        <li><a href="#添加一条数据">添加一条数据</a></li>
+        <li><a href="#编辑-查询-删除">编辑 查询 删除</a></li>
+      </ul>
+    </li>
+    <li><a href="#存储基本功能">存储基本功能</a>
+      <ul>
+        <li><a href="#上传-网站托管">上传 网站托管</a></li>
+      </ul>
+    </li>
+    <li><a href="#日志基本功能">日志基本功能</a></li>
+    <li><a href="#环境变量">环境变量</a></li>
+    <li><a href="#云函数的查询功能">云函数的查询功能</a></li>
+    <li><a href="#云函数的-增-删-改">云函数的 增 删 改</a></li>
+    <li><a href="#前端调用云函数">前端调用云函数</a></li>
+    <li><a href="#前端直连数据库">前端直连数据库</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="laf-开发指南比官方文档更详细待更新">Laf 开发指南（比官方文档更详细）待更新</h1>
+<p>laf 金丝雀版本已经不删档上线了，作为一个使用 laf 多年的开发者，<del>毕业设计我都是用 laf 写的&hellip;</del> 我深知 laf 对于前端程序员意味着什么，通过简单的学习就可以进行全栈开发 部署，带来了极致的开发体验，脏活累活 laf 都帮我们解决了，用 laf 甚至可以延年益寿&hellip;</p>
+<p>本文我根据 laf 功能模块来一一介绍，可以顺序阅读，也可以根据右边导航栏找到需要了解的模块。</p>
+<blockquote>
+<p>如果你还不知道 laf 是什么 参考：<a href="https://zuofeng59556.github.io/my-blog/pages/quickStart/laf/" target="_blank" rel="noopener noreffer ">三分钟学会 Laf</a></p>
+</blockquote>
+<p>:::tip
+因本文图片较多，打开设备的夜间模式，或者点击本站右上角的夜间模式开关，获得最佳阅读体验。<br>
+部分图片看不清细节，PC 端 CTRL + 鼠标滚轮 放大，移动端双指放大。
+:::</p>
+<h2 id="云函数基本功能">云函数基本功能</h2>
+<p>云函数是 laf 最重要的功能了，所以我们就从新建一个云函数开始。 <br>
+进入到 laf 开发页面我们可以点击中间的立即创建和左上角的 + 符号来创建一个云函数。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/1.png"
+        data-srcset="./image/1.png, ./image/1.png 1.5x, ./image/1.png 2x"
+        data-sizes="auto"
+        alt="./image/1.png"
+        title="alt 属性文本" /><br>
+参考下图的介绍来创建你的第一个云函数吧</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/2.png"
+        data-srcset="./image/2.png, ./image/2.png 1.5x, ./image/2.png 2x"
+        data-sizes="auto"
+        alt="./image/2.png"
+        title="alt 属性文本" /><br>
+创建完之后我们熟悉一下关于云函数都有哪些功能。</p>
+<h3 id="搜索-编辑-删除">搜索 编辑 删除</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/3.png"
+        data-srcset="./image/3.png, ./image/3.png 1.5x, ./image/3.png 2x"
+        data-sizes="auto"
+        alt="./image/3.png"
+        title="alt 属性文本" /></p>
+<h3 id="编写-发布-查看">编写 发布 查看</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/4.png"
+        data-srcset="./image/4.png, ./image/4.png 1.5x, ./image/4.png 2x"
+        data-sizes="auto"
+        alt="./image/4.png"
+        title="alt 属性文本" /></p>
+<h3 id="传参-调试">传参 调试</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/5.png"
+        data-srcset="./image/5.png, ./image/5.png 1.5x, ./image/5.png 2x"
+        data-sizes="auto"
+        alt="./image/5.png"
+        title="alt 属性文本" /></p>
+<h3 id="依赖-控制台-运行结果">依赖 控制台 运行结果</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/6.png"
+        data-srcset="./image/6.png, ./image/6.png 1.5x, ./image/6.png 2x"
+        data-sizes="auto"
+        alt="./image/6.png"
+        title="alt 属性文本" /></p>
+<h2 id="集合基本功能">集合基本功能</h2>
+<p>集合我们可以理解为数据库，每一个集合对应的就是一张表。</p>
+<p>和创建云函数一样，我们来创建一个集合。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/7.png"
+        data-srcset="./image/7.png, ./image/7.png 1.5x, ./image/7.png 2x"
+        data-sizes="auto"
+        alt="./image/7.png"
+        title="alt 属性文本" /></p>
+<h3 id="添加一条数据">添加一条数据</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/8.png"
+        data-srcset="./image/8.png, ./image/8.png 1.5x, ./image/8.png 2x"
+        data-sizes="auto"
+        alt="./image/8.png"
+        title="alt 属性文本" /></p>
+<h3 id="编辑-查询-删除">编辑 查询 删除</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/9.png"
+        data-srcset="./image/9.png, ./image/9.png 1.5x, ./image/9.png 2x"
+        data-sizes="auto"
+        alt="./image/9.png"
+        title="alt 属性文本" /></p>
+<h2 id="存储基本功能">存储基本功能</h2>
+<p>存储这里就是存放我们文件的地方，首先我们创建一个 bucket
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/10.png"
+        data-srcset="./image/10.png, ./image/10.png 1.5x, ./image/10.png 2x"
+        data-sizes="auto"
+        alt="./image/10.png"
+        title="alt 属性文本" /></p>
+<h3 id="上传-网站托管">上传 网站托管</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/11.png"
+        data-srcset="./image/11.png, ./image/11.png 1.5x, ./image/11.png 2x"
+        data-sizes="auto"
+        alt="./image/11.png"
+        title="alt 属性文本" /></p>
+<h2 id="日志基本功能">日志基本功能</h2>
+<p>日志就是我们云函数的执行日志，我们回到最初创建的 get-data 函数，写入以下代码，并点击右侧的运行按钮。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">async</span> <span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">ctx</span><span class="o">:</span> <span class="nx">FunctionContext</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;我执行了&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>云函数执行之后我们回到日志界面，发现多了一条记录，这里是 log 打出来的，如果你的云函数执行报错了，这里也会出现对应的记录。</p>
+<p>所以当你的云函数没有产生预期的效果的时候，可以来查看一下日志，说不定问题就迎刃而解了。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/12.png"
+        data-srcset="./image/12.png, ./image/12.png 1.5x, ./image/12.png 2x"
+        data-sizes="auto"
+        alt="./image/12.png"
+        title="alt 属性文本" /></p>
+<h2 id="环境变量">环境变量</h2>
+<p>点击右下角的齿轮图标到设置界面，然后点环境变量，我们可以在这里添加这个应用的一些环境变量，添加之后需要更新一下。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/13.png"
+        data-srcset="./image/13.png, ./image/13.png 1.5x, ./image/13.png 2x"
+        data-sizes="auto"
+        alt="./image/13.png"
+        title="alt 属性文本" /><br>
+更新完之后我们就可以在任意云函数中取到这个环境变量了，我刚刚添加了一个 API_KEY 的环境变量，现在取一下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">cloud</span> <span class="nx">from</span> <span class="s1">&#39;@lafjs/cloud&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">async</span> <span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">ctx</span><span class="o">:</span> <span class="nx">FunctionContext</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cloud</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">API_KEY</span><span class="p">)</span> <span class="c1">// qwer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="云函数的查询功能">云函数的查询功能</h2>
+<p>自己弄两张表 先把逻辑走通</p>
+<h2 id="云函数的-增-删-改">云函数的 增 删 改</h2>
+<h2 id="前端调用云函数">前端调用云函数</h2>
+<h2 id="前端直连数据库">前端直连数据库</h2>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/laf/">Laf</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/deploylaf/" class="prev" rel="prev" title="三分钟部署 laf (win 版本)"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>三分钟部署 laf (win 版本)</a>
+            <a href="/prototype/" class="next" rel="next" title="JavaScript 原型 原型链">JavaScript 原型 原型链<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+      </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">左风</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a
+        href="#"
+        id="back-to-top"
+        class="fixed-button"
+        title="回到顶部"
+      >
+        <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+      </a><a
+        href="#"
+        id="view-comments"
+        class="fixed-button"
+        title="查看评论"
+      >
+        <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+      </a>
+    </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+  
+  <script src="https://cdn.jsdelivr.net/gh/ZhaoUncle/image@main/static/mouse-click.js"></script>
+  <canvas
+    width="1777"
+    height="841"
+    style="
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 2147483647;
+      pointer-events: none;
+    "
+  ></canvas>
+</html>

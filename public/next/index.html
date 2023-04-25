@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noodp" />
+    <title>三分钟上手 Next.js - 3分钟实验室</title><meta name="Description" content="3分钟实验室"><meta property="og:title" content="三分钟上手 Next.js" />
+<meta property="og:description" content="起步 Next.js 能干啥？
+Compiling ： 把我们写的 jsx TS 等编译成浏览器认识的 js。 Minifying ： 把代码里的 缩进 空格 换行 删掉，减少文件大小来提高性能。 Bundling ： 把多个文件打包组合成更少的文件。 Code Splitting ：把代码按需分成小块，通过只加载需要的部分来减少加载时间。 Rendering ：支持服务端渲染直接发送 html 文件到浏览器，提升渲染速度。 。。。来点更直接的，Next.js 是 react 的一个框架，提供了很多方便的功能。
+以下命令创建一个 next 项目。
+1 npx create-next-app@latest 用 vscode 打开并清空 src/pages/index.js 和 src/styles/globals.css
+然后在 index.js 中贴入以下代码。
+1 2 3 4 5 6 7 export default function Home() { return ( &lt;&gt; &lt;h1&gt;你好,next&lt;/h1&gt; &lt;/&gt; ) } npm run dev 启动项目，打开 localhost:3000 快速刷新 更改 next 为 小明 就会发现浏览器视图已经更新，无需手动刷新，这就是快速刷新。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/next/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-25T00:00:00+00:00" /><meta property="og:site_name" content="3分钟实验室" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="三分钟上手 Next.js"/>
+<meta name="twitter:description" content="起步 Next.js 能干啥？
+Compiling ： 把我们写的 jsx TS 等编译成浏览器认识的 js。 Minifying ： 把代码里的 缩进 空格 换行 删掉，减少文件大小来提高性能。 Bundling ： 把多个文件打包组合成更少的文件。 Code Splitting ：把代码按需分成小块，通过只加载需要的部分来减少加载时间。 Rendering ：支持服务端渲染直接发送 html 文件到浏览器，提升渲染速度。 。。。来点更直接的，Next.js 是 react 的一个框架，提供了很多方便的功能。
+以下命令创建一个 next 项目。
+1 npx create-next-app@latest 用 vscode 打开并清空 src/pages/index.js 和 src/styles/globals.css
+然后在 index.js 中贴入以下代码。
+1 2 3 4 5 6 7 export default function Home() { return ( &lt;&gt; &lt;h1&gt;你好,next&lt;/h1&gt; &lt;/&gt; ) } npm run dev 启动项目，打开 localhost:3000 快速刷新 更改 next 为 小明 就会发现浏览器视图已经更新，无需手动刷新，这就是快速刷新。"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/next/" /><link rel="prev" href="http://example.org/offer/" /><link rel="next" href="http://example.org/deploylaf/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "三分钟上手 Next.js",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/next\/"
+        },"genre": "posts","keywords": "React","wordcount":  277 ,
+        "url": "http:\/\/example.org\/next\/","datePublished": "2023-04-25T00:00:00+00:00","dateModified": "2023-04-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "左风"
+            },"description": ""
+    }
+    </script></head>
+
+  <body
+    data-header-desktop="fixed"
+    data-header-mobile="auto"
+  ><script type="text/javascript">
+      (window.localStorage && localStorage.getItem("theme")
+        ? localStorage.getItem("theme") === "dark"
+        : "auto" === "auto"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : "auto" === "dark") &&
+        document.body.setAttribute("theme", "dark");
+    </script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="3分钟实验室">3分钟实验室</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/mikutap/"> 在线打碟 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="3分钟实验室">3分钟实验室</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/mikutap/" title="">在线打碟</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+        <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">三分钟上手 Next.js</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>前端框架</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-25">2023-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 277 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#起步">起步</a></li>
+    <li><a href="#快速刷新">快速刷新</a></li>
+    <li><a href="#路由">路由</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="起步">起步</h2>
+<p><strong>Next.js 能干啥？</strong></p>
+<ul>
+<li>Compiling ： 把我们写的 <code>jsx</code> <code>TS</code> 等编译成浏览器认识的 <code>js</code>。</li>
+<li>Minifying ： 把代码里的 缩进 空格 换行 删掉，减少文件大小来提高性能。</li>
+<li>Bundling  ： 把多个文件打包组合成更少的文件。</li>
+<li>Code Splitting ：把代码按需分成小块，通过只加载需要的部分来减少加载时间。</li>
+<li>Rendering ：支持服务端渲染直接发送 <code>html</code> 文件到浏览器，提升渲染速度。</li>
+</ul>
+<p>。。。来点更直接的，<code>Next.js</code> 是 <code>react</code> 的一个框架，提供了很多方便的功能。</p>
+<p>以下命令创建一个 <code>next</code> 项目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npx create-next-app@latest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用 vscode 打开并清空 <code>src/pages/index.js</code> 和 <code>src/styles/globals.css</code><br>
+然后在 <code>index.js</code> 中贴入以下代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Home</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">你好</span><span class="p">,</span><span class="nx">next</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>npm run dev</code> 启动项目，打开 localhost:3000
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/1.png"
+        data-srcset="./image/1.png, ./image/1.png 1.5x, ./image/1.png 2x"
+        data-sizes="auto"
+        alt="./image/1.png"
+        title="alt 属性文本" /></p>
+<h2 id="快速刷新">快速刷新</h2>
+<p>更改 next 为 小明 就会发现浏览器视图已经更新，无需手动刷新，这就是快速刷新。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Home</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">你好</span><span class="p">,</span><span class="nx">小明</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="路由">路由</h2>
+<p>我们在 <code>pages</code> 里面新建一个文件夹 <code>red.js</code>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/2.png"
+        data-srcset="./image/2.png, ./image/2.png 1.5x, ./image/2.png 2x"
+        data-sizes="auto"
+        alt="./image/2.png"
+        title="alt 属性文本" /><br>
+写入以下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Red</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">我是小红</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>浏览器访问 localhost:3000/red
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/3.png"
+        data-srcset="./image/3.png, ./image/3.png 1.5x, ./image/3.png 2x"
+        data-sizes="auto"
+        alt="./image/3.png"
+        title="alt 属性文本" /><br>
+哦吼，这就是路由，总结一下</p>
+<ul>
+<li>无需额外配置路由，<code>pages</code> 下的文件名即是路由<code>url</code></li>
+<li>但是记得要默认导出 <code>export default</code></li>
+<li><code>pages/index.js</code> 默认路径 <code>/</code> 也就是首页</li>
+<li>访问<code>pages/login/index.js</code> 就是 localhost:3000/login/index</li>
+</ul>
+<hr>
+<p>下面看看如何跳转,贴入一下代码, 点击就会跳转到 localhost:3000/red</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">Router</span> <span class="nx">from</span> <span class="s2">&#34;next/router&#34;</span> <span class="c1">// 引入 router
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Home</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="kr">goto</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;/red&#39;</span><span class="p">)</span>  <span class="c1">// Router.push 中传入url
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="kr">goto</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">你好</span><span class="p">,</span><span class="nx">小明</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果想要传参数, 按照以下格式<br>
+<code>index.js</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">Router</span> <span class="nx">from</span> <span class="s2">&#34;next/router&#34;</span> <span class="c1">// 引入 router
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Home</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="kr">goto</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 跳转路由并传递参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Router</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="nx">pathname</span><span class="o">:</span> <span class="s1">&#39;/red&#39;</span><span class="p">,</span> <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;小明传来的&#39;</span> <span class="p">}</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="kr">goto</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">你好</span><span class="p">,</span><span class="nx">小明</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接收参数<br>
+<code>red.js</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">useRouter</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;next/router&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Red</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 创建 router 对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">useRouter</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="cm">/* 接收参数 */</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">router</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>因为想先先写别的，所以这个先搁置。。。。。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/react/">React</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/offer/" class="prev" rel="prev" title="三分钟写了一个专属 ChatGPT ，Laf 创始人：明天来上班！"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>三分钟写了一个专属 ChatGPT ，Laf 创始人：明天来上班！</a>
+            <a href="/deploylaf/" class="next" rel="next" title="三分钟部署 laf (win 版本)">三分钟部署 laf (win 版本)<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+      </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">左风</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a
+        href="#"
+        id="back-to-top"
+        class="fixed-button"
+        title="回到顶部"
+      >
+        <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+      </a><a
+        href="#"
+        id="view-comments"
+        class="fixed-button"
+        title="查看评论"
+      >
+        <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+      </a>
+    </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+  
+  <script src="https://cdn.jsdelivr.net/gh/ZhaoUncle/image@main/static/mouse-click.js"></script>
+  <canvas
+    width="1777"
+    height="841"
+    style="
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 2147483647;
+      pointer-events: none;
+    "
+  ></canvas>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noodp" />
+    <title>三分钟学会参与开源，提交 PR - 3分钟实验室</title><meta name="Description" content="3分钟实验室"><meta property="og:title" content="三分钟学会参与开源，提交 PR" />
+<meta property="og:description" content="三分钟学会参与开源，提交 pr pr 是什么 假设：
+你在 GitHub 上发现了一个开源项目。 觉得项目中有 bug,或者写的不够好。 你想出手帮帮他。 这个时候就会用到 pr (pull request)。 这里翻译为： 我改了你的代码，你快来看看把！ 项目克隆到本地 首先找到一个项目，点击右上角的 Fork 按钮，把项目复制一份到自己的 GitHub。
+Fork 完之后我们到自己的仓库列表，找到刚刚复制的仓库，并 clone 到自己本地。 :::tip 这里要注意，一定是 clone 自己复制的那一份哦，而不是原仓库，没有人会让你直接更改别人代码的。 :::
+在正式改代码之前我们还需要了解一下仓库的关系。
+我们现在拥有三份代码，称为三个仓库。
+原作者 GitHub 上的仓库称为 upstream Fork 复制到我们自己 GitHub 上的称为 origin 从我们自己 GitHub 上 clone 到本地的称为 local 在我们项目目录下执行 git remote -v 发现只有origin仓库。 这里用 git remote add upstream 原仓库地址 来添加upstream仓库。 再次 git remote -v 查看添加成功。 至此，我们三个仓库就都关联上了。
+改代码 改别人代码之前我们还需要做一件事情，那就是基于 upstream 仓库创建一个新的分支。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/pr/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-25T00:00:00+00:00" /><meta property="og:site_name" content="3分钟实验室" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="三分钟学会参与开源，提交 PR"/>
+<meta name="twitter:description" content="三分钟学会参与开源，提交 pr pr 是什么 假设：
+你在 GitHub 上发现了一个开源项目。 觉得项目中有 bug,或者写的不够好。 你想出手帮帮他。 这个时候就会用到 pr (pull request)。 这里翻译为： 我改了你的代码，你快来看看把！ 项目克隆到本地 首先找到一个项目，点击右上角的 Fork 按钮，把项目复制一份到自己的 GitHub。
+Fork 完之后我们到自己的仓库列表，找到刚刚复制的仓库，并 clone 到自己本地。 :::tip 这里要注意，一定是 clone 自己复制的那一份哦，而不是原仓库，没有人会让你直接更改别人代码的。 :::
+在正式改代码之前我们还需要了解一下仓库的关系。
+我们现在拥有三份代码，称为三个仓库。
+原作者 GitHub 上的仓库称为 upstream Fork 复制到我们自己 GitHub 上的称为 origin 从我们自己 GitHub 上 clone 到本地的称为 local 在我们项目目录下执行 git remote -v 发现只有origin仓库。 这里用 git remote add upstream 原仓库地址 来添加upstream仓库。 再次 git remote -v 查看添加成功。 至此，我们三个仓库就都关联上了。
+改代码 改别人代码之前我们还需要做一件事情，那就是基于 upstream 仓库创建一个新的分支。"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/pr/" /><link rel="prev" href="http://example.org/chatgpt/" /><link rel="next" href="http://example.org/zustand/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "三分钟学会参与开源，提交 PR",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/pr\/"
+        },"genre": "posts","keywords": "GitHub","wordcount":  185 ,
+        "url": "http:\/\/example.org\/pr\/","datePublished": "2023-04-25T00:00:00+00:00","dateModified": "2023-04-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "左风"
+            },"description": ""
+    }
+    </script></head>
+
+  <body
+    data-header-desktop="fixed"
+    data-header-mobile="auto"
+  ><script type="text/javascript">
+      (window.localStorage && localStorage.getItem("theme")
+        ? localStorage.getItem("theme") === "dark"
+        : "auto" === "auto"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : "auto" === "dark") &&
+        document.body.setAttribute("theme", "dark");
+    </script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="3分钟实验室">3分钟实验室</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/mikutap/"> 在线打碟 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="3分钟实验室">3分钟实验室</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/mikutap/" title="">在线打碟</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+        <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">三分钟学会参与开源，提交 PR</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%B7%A5%E5%85%B7/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>工具</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-25">2023-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 185 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#pr-是什么">pr 是什么</a></li>
+    <li><a href="#项目克隆到本地">项目克隆到本地</a></li>
+    <li><a href="#改代码">改代码</a></li>
+    <li><a href="#提交">提交</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#heading">:::tip
+同一个仓库第二次提 pr 从更新代码到 local 开始就可以啦
+:::</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="三分钟学会参与开源提交-pr">三分钟学会参与开源，提交 pr</h1>
+<h2 id="pr-是什么">pr 是什么</h2>
+<p><strong>假设：</strong></p>
+<ul>
+<li>你在 GitHub 上发现了一个开源项目。</li>
+<li>觉得项目中有 bug,或者写的不够好。</li>
+<li>你想出手帮帮他。</li>
+<li>这个时候就会用到 pr (pull request)。</li>
+<li>这里翻译为： 我改了你的代码，你快来看看把！</li>
+</ul>
+<h2 id="项目克隆到本地">项目克隆到本地</h2>
+<p>首先找到一个项目，点击右上角的 Fork 按钮，把项目复制一份到自己的 GitHub。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/1.png"
+        data-srcset="./image/1.png, ./image/1.png 1.5x, ./image/1.png 2x"
+        data-sizes="auto"
+        alt="./image/1.png"
+        title="alt 属性文本" /><br>
+Fork 完之后我们到自己的仓库列表，找到刚刚复制的仓库，并 clone 到自己本地。
+:::tip
+这里要注意，一定是 clone 自己复制的那一份哦，而不是原仓库，没有人会让你直接更改别人代码的。
+:::</p>
+<p>在正式改代码之前我们还需要了解一下仓库的关系。<br>
+我们现在拥有三份代码，称为三个仓库。</p>
+<ul>
+<li>原作者 GitHub 上的仓库称为 <code>upstream</code></li>
+<li>Fork 复制到我们自己 GitHub 上的称为 <code>origin</code></li>
+<li>从我们自己 GitHub 上 clone 到本地的称为 <code>local</code>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/2.png"
+        data-srcset="./image/2.png, ./image/2.png 1.5x, ./image/2.png 2x"
+        data-sizes="auto"
+        alt="./image/2.png"
+        title="alt 属性文本" /></li>
+</ul>
+<p>在我们项目目录下执行 <code>git remote -v</code> 发现只有<code>origin</code>仓库。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/3.png"
+        data-srcset="./image/3.png, ./image/3.png 1.5x, ./image/3.png 2x"
+        data-sizes="auto"
+        alt="./image/3.png"
+        title="alt 属性文本" /><br>
+这里用 <code>git remote add upstream 原仓库地址</code> 来添加<code>upstream</code>仓库。 <br>
+再次 <code>git remote -v</code> 查看添加成功。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/4.png"
+        data-srcset="./image/4.png, ./image/4.png 1.5x, ./image/4.png 2x"
+        data-sizes="auto"
+        alt="./image/4.png"
+        title="alt 属性文本" /><br>
+至此，我们三个仓库就都关联上了。</p>
+<h2 id="改代码">改代码</h2>
+<p>改别人代码之前我们还需要做一件事情，那就是基于 <code>upstream</code> 仓库创建一个新的分支。<br>
+为什么这里需要创建新的<code>分支</code>呢，为一个<code>分支</code>在同一时间只能提交一个 <code>pr</code> 所以一般建议新建一个分支来提交 <code>pr</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 获取到 upstream 仓库的 main 分支
+</span></span><span class="line"><span class="cl">git fetch upstream main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 切换到 upstream 仓库的 main 分支
+</span></span><span class="line"><span class="cl">git checkout upstream/main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 基于 upstream 仓库的 main 分支新建一个 feat-1 分支并切换
+</span></span><span class="line"><span class="cl">git switch -c feat-1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>好了终于可以修改代码了<br>
+我们打开项目里仅有的 <code>readme</code>  文件，发现这里至少有两处错误，该大写的没大写，也不懂的使用三单。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/5.png"
+        data-srcset="./image/5.png, ./image/5.png 1.5x, ./image/5.png 2x"
+        data-sizes="auto"
+        alt="./image/5.png"
+        title="alt 属性文本" /><br>
+经过我们一番修改后，看起来没有什么问题了。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/6.png"
+        data-srcset="./image/6.png, ./image/6.png 1.5x, ./image/6.png 2x"
+        data-sizes="auto"
+        alt="./image/6.png"
+        title="alt 属性文本" /></p>
+<h2 id="提交">提交</h2>
+<p>然后我们提交代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m &#39;fix:修复了一些语法错误&#39;
+</span></span><span class="line"><span class="cl">// 这里要指明提交的仓库和分支
+</span></span><span class="line"><span class="cl">git push origin feat-1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提交成功后，打开 GitHub 我们 Fork 的仓库发现已经有提示了，我们点击右侧绿色按钮。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/7.png"
+        data-srcset="./image/7.png, ./image/7.png 1.5x, ./image/7.png 2x"
+        data-sizes="auto"
+        alt="./image/7.png"
+        title="alt 属性文本" /><br>
+如果你没有看到提示，切换到我们刚刚提交的分支，点击这里进入。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/8.png"
+        data-srcset="./image/8.png, ./image/8.png 1.5x, ./image/8.png 2x"
+        data-sizes="auto"
+        alt="./image/8.png"
+        title="alt 属性文本" /><br>
+总之我们进入到这个页面，按照项目要求填写标题和描述，点击右下角 <code>Create pull request</code>，来创建 pr。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/9.png"
+        data-srcset="./image/9.png, ./image/9.png 1.5x, ./image/9.png 2x"
+        data-sizes="auto"
+        alt="./image/9.png"
+        title="alt 属性文本" /><br>
+提交后看到这个页面，就说明我们的 pr 已经提交成功了，等作者合并你的 pr 你就成为这个项目的 contributor 啦。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./image/10.png"
+        data-srcset="./image/10.png, ./image/10.png 1.5x, ./image/10.png 2x"
+        data-sizes="auto"
+        alt="./image/10.png"
+        title="alt 属性文本" /></p>
+<h2 id="总结">总结</h2>
+<ul>
+<li>Fork 到自己GitHub</li>
+<li>clone 到本地</li>
+<li>添加 upstream 仓库</li>
+<li>更新代码到local</li>
+<li>创建分支</li>
+<li>写代码</li>
+<li>提交代码到 origin</li>
+<li>创建 pr</li>
+<li>成为 contributor</li>
+</ul>
+<h2 id="heading">:::tip
+同一个仓库第二次提 pr 从更新代码到 local 开始就可以啦
+:::</h2>
+<blockquote>
+<p>如果本文对你有帮助，可以去 Github 给我的博客点个 star 嘛 <br>
+<strong><a href="https://github.com/zuoFeng59556/my-blog" target="_blank" rel="noopener noreffer ">https://github.com/zuoFeng59556/my-blog</a></strong></p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/github/">GitHub</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/chatgpt/" class="prev" rel="prev" title="三分钟拥有自己的 ChatGPT (从开发到上线) "><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>三分钟拥有自己的 ChatGPT (从开发到上线) </a>
+            <a href="/zustand/" class="next" rel="next" title="三分钟学会 zustand 优雅的管理你的状态">三分钟学会 zustand 优雅的管理你的状态<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+      </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">左风</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a
+        href="#"
+        id="back-to-top"
+        class="fixed-button"
+        title="回到顶部"
+      >
+        <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+      </a><a
+        href="#"
+        id="view-comments"
+        class="fixed-button"
+        title="查看评论"
+      >
+        <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+      </a>
+    </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+  
+  <script src="https://cdn.jsdelivr.net/gh/ZhaoUncle/image@main/static/mouse-click.js"></script>
+  <canvas
+    width="1777"
+    height="841"
+    style="
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 2147483647;
+      pointer-events: none;
+    "
+  ></canvas>
+</html>

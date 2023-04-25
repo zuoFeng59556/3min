@@ -4,11 +4,40 @@
     ><url>
             <loc>http://example.org/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://example.org/categories/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://example.org/tags/index/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/tags/github/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://example.org/tags/javascript/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://example.org/categories/javascript/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/promise/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/copy/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/eventloop/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/prototype/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/tags/laf/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/categories/laf-%E6%95%99%E7%A8%8B/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/lafguide/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://example.org/tags/others/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://example.org/categories/others/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://example.org/posts/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/tags/react/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://example.org/tags/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://example.org/first_post/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url></urlset>
+            <loc>http://example.org/categories/%E9%9D%9E%E6%8A%80%E6%9C%AF%E7%B1%BB/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/categories/%E5%B7%A5%E5%85%B7/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/deploylaf/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/next/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/offer/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/chakra/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/clicktocomponent/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/laf/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/react/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/reactrouter/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/tailwind/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/zustand/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/pr/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/chatgpt/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/tags/%E9%A1%B9%E7%9B%AE/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</loc><lastmod>2023-04-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/array/</loc><lastmod>2023-04-23T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/closure/</loc><lastmod>2023-04-23T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/variate/</loc><lastmod>2023-04-23T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/object/</loc><lastmod>2023-04-23T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/function/</loc><lastmod>2023-04-23T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/preface/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
