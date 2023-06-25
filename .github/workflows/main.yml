@@ -22,14 +22,15 @@ jobs:
       # 复制仓库代码到 runner 上。
       - uses: actions/checkout@v3
 
-    - name: Setup Hugo
-          uses: peaceiris/actions-hugo@v2
-          with:
-            hugo-version: 'latest'
-            extended: true
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          cmd: 'latest' 
 
-    - name: Build Hugo
-      run: hugo --minify
+      - name: Run build
+        uses: peaceiris/actions-hugo@v2
+        with:
+          run: hugo --minify
 
       # 使用 laf-cli 工具初始化并登录到 Laf 平台。
       - name: Setup laf-cli
