@@ -3,7 +3,43 @@
         <title>所有文章 - 3分钟实验室</title>
         <link>http://example.org/posts/</link>
         <description>所有文章 | 3分钟实验室</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 15 Jun 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>30 秒拥有自己的 ChatGPT（一行代码不用写）</title>
+    <link>http://example.org/sealos/</link>
+    <pubDate>Thu, 15 Jun 2023 00:00:00 &#43;0000</pubDate>
+    <author>左风</author>
+    <guid>http://example.org/sealos/</guid>
+    <description><![CDATA[先上效果图
+话不多说直接开整！
+预备条件 有一台能打开浏览器的电脑 有一个 ChatGPT 的 Key 如果你没有我送你一个 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
+开始 浏览器打开这个网址 https://sealos.io/ 点击 在线使用 然后登陆进来。
+点这个 AppLaunchpad 点右上新建 这个页面里需要输入的东西有：
+文末会解释为什么填写这些，现在我们先快速搭建起来
+AppName 这个随便起个名字就可以 Image Name 填写 yidadaa/chatgpt-next-web CPU 选择 1 Memory 选择 521Mi Container Ports 填写 3000 Accessible to the Public 这个点击打开 填写完这些后点击右上角 Deploy Application 到这个页面点击这个链接访问大功告成
+如果访问不了就稍微等一会，可能是还没部署成功
+打开之后在这里填入 ChatGPT 的 Key
+ok 搞定！
+干了什么？ Image Name 填写 yidadaa/chatgpt-next-web ，这一步是写了一个开源项目作者提供的镜像名，这里不多做解释，如果你遇到一个项目开源并且提供的容器的部署方式（就是能找到镜像名）都可以用这种方式一建部署。
+CPU 选择 1 Memory 选择 521Mi ，这里是我测试的最低能跑这个项目的配置，如果给的低了项目跑不起来。
+Container Ports 填写 3000 ，这里是项目作者暴露的端口，一般都会写在部署文档上，写什么填什么就好了。]]></description>
+</item>
+<item>
+    <title>什么是云开发？</title>
+    <link>http://example.org/clouddevelopment/</link>
+    <pubDate>Thu, 11 May 2023 00:00:00 &#43;0000</pubDate>
+    <author>左风</author>
+    <guid>http://example.org/clouddevelopment/</guid>
+    <description><![CDATA[本文主要解决三个问题 ：
+云开发是什么 我们为什么需要云开发 如何快速上手地表最强云开发 Laf（https://laf.run） 云开发是什么？ 我们来看看 GPT 怎么说。
+一句话总结：云开发是一种模式，区别于传统开发，传统开发有的东西，云开发都有，传统开发能实现的，云开发也都能实现。
+那么第二个问题就来了，既然都有都能实现，我们为什么需要云开发？
+我们为什么需要云开发？ 为了搞懂这个问题，我们需要先知道传统的开发流程以及所需要的技术栈，我们这里以云开发中的战斗机 Laf（laf.run）举例。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 传统开发流程： 1.购买服务器 2.配置服务器的环境数据库等 3.编写接口代码 4.把代码部署到服务器 5.前端搞定剩余工作 6.前端项目打包部署到服务器 7.后续运维工作 云开发流程： 1.打开浏览器编写接口代码 2.前端搞定剩余工作 3.项目一键托管上线到云平台 传统开发所需技术栈： 1.一门后端语言 2.后端框架 3.数据库 4.缓存技术 5.操作系统相关 6.前端三件套+框架+常用库 云开发所需技术栈： 1.云开发的数据库和文件操作 2.前端三件套+框架+常用库 了解这些之后，我想根本不需要明白这些实现细节，单单从字数上就可以感受到，云开发模式和传统开发模式之间的区别。
+简单总结一下就是三省：省心省力又省钱。
+用 Laf，前端我们用 js/ts 来写代码，后端接口我们还是用 js/ts 来写代码，这意味着什么？这意味着只需要掌握一门开发语言，就可以前后端通杀了，这意味着前端工程师可以瞬间变成全栈开发，意味着前端和后端再也不用吵架了。
+用 Laf，可以节约服务器运维，多环境部署，告别配置调试 nginx ，告别为每个项目手动部署数据库和安全顾虑，告别 coding 一分钟发布半小时的尴尬场景等等。]]></description>
+</item>
+<item>
     <title>JavaScript Promise async await</title>
     <link>http://example.org/promise/</link>
     <pubDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</pubDate>
@@ -115,28 +151,6 @@ Compiling ： 把我们写的 jsx TS 等编译成浏览器认识的 js。 Minify
 我一想博客也很久没更新了（主要是他叫了我一声大佬），就顺便写一篇吧，然后我（迅速又帅气的）取出我的 68键，拾光白轴，PBT豆奶键帽的键盘，行云流水的码完了一篇文章：三分钟拥有自己的 ChatGPT (从开发到上线)
 这篇文章经过 米开朗基杨 的润色之后几番转载， laf 一天增加了上百个 star，四百多应用，直接送上 Github Trending。 转折 然后，然后重点来了。
 THE END life is short, you need laf 😃 https://laf.dev/]]></description>
-</item>
-<item>
-    <title>三分钟学会 Chakra-UI 写一个厉害的登录页</title>
-    <link>http://example.org/chakra/</link>
-    <pubDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</pubDate>
-    <author>左风</author>
-    <guid>http://example.org/chakra/</guid>
-    <description><![CDATA[三分钟学会 Chakra-UI 写一个厉害的登录页 起步 老规矩创建一个项目用 vscode 打开
-1 2 3 npm create vite chakra-demo --template react cd chakra-demo code . 打开后删除 src 下的其他文件夹，只保留 App.jsx 和 main.jsx 写入以下代码
-App.jsx
-1 2 3 4 5 function App() { return &lt;h1&gt;你好,chakra&lt;/h1&gt; } export default App main.jsx
-1 2 3 4 5 6 7 8 9 import React from &#39;react&#39; import ReactDOM from &#39;react-dom/client&#39; import App from &#39;./App&#39; ReactDOM.createRoot(document.getElementById(&#39;root&#39;)).render( &lt;React.StrictMode&gt; &lt;App /&gt; &lt;/React.StrictMode&gt;, ) 准备好这些以后 安装 chakra 并且安装一下依赖 把程序 run 起来]]></description>
-</item>
-<item>
-    <title>三分钟学会 ClickToComponent</title>
-    <link>http://example.org/clicktocomponent/</link>
-    <pubDate>Tue, 25 Apr 2023 00:00:00 &#43;0000</pubDate>
-    <author>左风</author>
-    <guid>http://example.org/clicktocomponent/</guid>
-    <description><![CDATA[起步 老规矩创建一个项目用 vscode 打开
-1 2 3 4 5 6 npm create vite clickToComponent-demo --template react cd clickToComponent-demo // 这里顺手把依赖装了 npm i npm install click-to-react-component code . 删除 src 下面的多余文件，保留 App.jsx main.jsx 并创建 black.jsx red.jsx 分别写入以下代码 main.jsx
-1 2 3 4 5 6 7 8 9 10 11 12 13 import React from &#39;react&#39; import ReactDOM from &#39;react-dom/client&#39; import App from &#39;./App&#39; // 这里引入 import { ClickToComponent } from &#34;click-to-react-component&#34;; ReactDOM.]]></description>
 </item>
 </channel>
 </rss>

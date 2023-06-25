@@ -110,6 +110,33 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/zuoFeng59556" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://space.bilibili.com/260736087" title="bilibili" target="_blank" rel="noopener noreffer me"><i data-svg-src="/lib/simple-icons/icons/bilibili.min.svg" aria-hidden="true"></i></a><a href="mailto:wzj59556@gmail.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/chatgpt/">三分钟拥有自己的 ChatGPT (从开发到上线) </a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2023-04-25">2023-04-25</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>项目开发</a></span></div><div class="content">OpenAI 已经公布了 ChatGPT 正式版 API，背后的新模型是 gpt-3.5-turbo，这是 OpenAI 目前最先进的模型，响应速度更快，价格更便宜。
+作为开发人员，我们还是希望通过 API 将 ChatGPT 和相关模型集成到自己的产品和应用中，尴尬的是，目前无法访问 ChatGPT API，原因大家都懂得。于是网上出现了各种各样的 API 反代服务，我们可以直接通过反代服务来变相访问 ChatGPT API。
+即使我们解决了 API 的访问问题，还要准备一个开发环境，比如对于 Node.js 客户端来说，需要准备一个 Node.js 环境。
+有没有一种简单快捷的方法来调用 ChatGPT API 呢？
+那当然是用 Laf 了。
+Laf 是一个完全开源的一站式云开发平台，提供了开箱即用的云函数，云数据库，对象存储等能力，让你可以像写博客一样写代码。
+GitHub：https://github.com/labring/laf
+如果你希望快速了解 Laf 的用法，可以参考这篇文章：三分钟学会 Laf。
+言归正传，下面我们开始计时，三分钟时间用 Laf 实现一个自己的 ChatGPT！
+前提条件：你需要准备一个 ChatGPT 账号并且生成一个 API Key (这一步可以问 Google )
+云函数教学 首先需要登录 laf.dev，然后新建一个应用。
+点击开发按钮进入开发页面。
+在 NPM 依赖面板中点击右上角的 +：
+然后输入 chatgpt 并回车进行搜索，选择第一个搜索结果，保存并重启：
+重启之后，自定义依赖项中便出现了 chatgpt。
+然后就可以像我一样新建一个云函数名字叫 send，并写入以下内容：
+1 2 3 4 5 6 7 8 9 10 import cloud from &#39;@lafjs/cloud&#39; export async function main(ctx: FunctionContext) { const { ChatGPTAPI } = await import(&#39;chatgpt&#39;) const api = new ChatGPTAPI({ apiKey: cloud.</div><div class="post-footer">
+        <a href="/chatgpt/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/array/">JavaScript Array 常用方法</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2023-04-23">2023-04-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>前端基础</a></span></div><div class="content">Array forEach forEach 循环的时候会不会改变原数组要看数组中的值是原始数据类型还是引用数据类型。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 const arr1 = [&#34;火龙果&#34;, &#34;草莓&#34;, &#34;车厘子&#34;, &#34;橘子&#34;]; arr1.forEach((item) =&gt; { item = &#34;苹果&#34;; }); console.log(arr1); // 原始数据类型 不会改变原数组 /* [ &#34;火龙果&#34;, &#34;草莓&#34;, &#34;车厘子&#34;, &#34;橘子&#34; ] */ const arr2 = [ { name: &#34;火龙果&#34; }, { name: &#34;草莓&#34; }, { name: &#34;车厘子&#34; }, { name: &#34;橘子&#34; }, ]; arr2.</div><div class="post-footer">
+        <a href="/array/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/javascript/">JavaScript</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/closure/">JavaScript 闭包</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2023-04-23">2023-04-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>前端基础</a></span></div><div class="content">概念 闭包是指一个函数对周围状态的引用捆绑在一起，简单说就是内层函数引用外层函数的变量。
 1 2 3 4 5 6 7 // 下面这段代码就形成了一个闭包。 function fn (){ const a = &#39;123&#39; function ok(){ console.log(a) // 这里使用了外层函数 fn的变量a } } 示例 1 2 3 4 5 6 7 8 9 10 11 function count (){ let i = 0 return function ok(){ i++ console.log(i) } } const fn = count() fn() 上面代码实现了一个计数功能，变量i成为私有变量，外部可以使用但不能修改，因为js的垃圾回收机制，i一直不会被回收。
@@ -140,16 +167,6 @@ this 普通函数中的this指向调用者，也就是运行时确定。
 1 2 3 4 5 6 7 8 9 10 const sayName = () =&gt; { console.</div><div class="post-footer">
         <a href="/function/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/javascript/">JavaScript</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/preface/"></a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>左风</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">为什么是三分钟 最初学写代码的时候学习 c c++ java 以及 操作系统 计算机网络 系统结构 等专业课，常常听说要打牢基础，搞懂原理，学了很长一段时间，八股倒是背的滚瓜烂熟 可一个实际的项目也做不出来，学习的过程非常痛苦。
-直到接触前端，学了一点 html 和 js 就去 vue 项目中瞎改乱写，当时对框架的概念也很模糊 大概知道一些动态绑定 v-if 之类的概念，就一边搜索一边抄，很多代码都是复制过来直接用，就这样写的很起劲 效率也非常高，等能抄的非常熟练的时候再去阅读 vue 的文档，了解其实现原理就非常有趣一点也不枯燥。
-后来就总结学一个东西先快速学会简单使用，用到哪里学哪里，等用的熟了再去关心 细节 原理这些，而且这本身也就是正确的学习方式。
-这里引用一下 编程入门之道 的建议。 &ldquo;这是我的第一个也是最重要的建议。
-无论是学一门语言，还是学一个工具：尽可能地先用最短的时间搞懂这个东西是做什么的，然后以最快的方式把它 “run”起来。
-当你已经能跑起一个语言、一个工具的最简单的示例的时候，再去花时间慢慢了解背后的复杂的内容，再去拓展即可。先用起来，跑起来，带着问题去翻资料。&rdquo;
-所以三分钟的目的就是，快速知道这个东西是做什么的，然后以最快的方式把它 “run” 起来。 </div><div class="post-footer">
-        <a href="/preface/">阅读全文</a></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -165,6 +182,10 @@ this 普通函数中的this指向调用者，也就是运行时确定。
                 </li><li class="page-item active">
                     <span class="page-link">
                         <a href="/page/4/">4</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/5/">5</a>
                     </span>
                 </li></ul></div></div>
       </main><footer class="footer">
