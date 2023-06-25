@@ -29,16 +29,17 @@ jobs:
           node-version: 16.x
 
       # 在 docs 目录下安装所有依赖项。
-      - name: Run Install
-        uses: borales/actions-yarn@v4
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          cmd: install # 将在 docs 目录下运行 yarn install 命令。
+          cmd: 'latest' # 将在 docs 目录下运行 yarn install 命令。
 
       # 在 docs 目录下构建文档网站。
       - name: Run build
-        uses: borales/actions-yarn@v4
+        uses: peaceiris/actions-hugo@v2
         with:
-          cmd: build # 将在 docs 目录下运行 yarn build 命令。
+         cmd: hugo --minify
+         args: --gc --minify --cleanDestinationDir
 
       # 使用 laf-cli 工具初始化并登录到 Laf 平台。
       - name: Setup laf-cli
@@ -53,7 +54,7 @@ jobs:
 
       # 将构建好的文档推送到 Laf 平台中指定的存储桶中。
       - name: Deploy to laf
-        working-directory: docs/.vitepress
+        working-directory: public/
         run: |
           laf app init ${{ env.LAF_CI_DOCS_APPID }}  # 初始化应用。
-          laf storage push -f ${{ env.LAF_CI_DOCS_BUCKET_NAME }} dist/  # 将 dist 目录下的文件推送到指定的存储桶中。
+          laf storage push -f ${{ env.LAF_CI_DOCS_BUCKET_NAME }}   # 将 dist 目录下的文件推送到指定的存储桶中。
