@@ -1,0 +1,59 @@
+name: deploy docs  # Action 名称为“deploy docs”。
+
+# 在 workflow_dispatch 或 push 到 main 分支时触发该 Action，
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+# 定义环境变量 LAF_CI_DOCS_PAT、LAF_CI_DOCS_APPID、LAF_CI_DOCS_BUCKET_NAME 和 LAF_API_URL。
+env:
+  LAF_CI_DOCS_PAT: ${{ secrets.LAF_CI_DOCS_PAT }}  # 获取 PAT。
+  LAF_CI_DOCS_APPID: ${{ secrets.LAF_CI_DOCS_APPID }}  # 获取应用编号。
+  LAF_CI_DOCS_BUCKET_NAME: ${{ secrets.LAF_CI_DOCS_BUCKET_NAME }}  # 获取存储桶名称。
+  LAF_API_URL: ${{ secrets.LAF_API_URL }}  # 获取 Laf 平台的 API URL。
+
+# 定义名为 linkCheckerAndDeploy 的 job，在 Ubuntu 最新版本上运行。
+jobs:
+  linkCheckerAndDeploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 复制仓库代码到 runner 上。
+      - uses: actions/checkout@v3
+
+      # 设置 Node.js 16.x 版本。
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      # 在 docs 目录下安装所有依赖项。
+      - name: Run Install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # 将在 docs 目录下运行 yarn install 命令。
+
+      # 在 docs 目录下构建文档网站。
+      - name: Run build
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build # 将在 docs 目录下运行 yarn build 命令。
+
+      # 使用 laf-cli 工具初始化并登录到 Laf 平台。
+      - name: Setup laf-cli
+        run: npm i laf-cli -g  # 安装 laf-cli。
+
+      # 添加用户、切换用户和使用 PAT 登录。
+      - name: Login laf-cli
+        run: | 
+          laf user add doc -r ${{ env.LAF_API_URL }}  # 添加名为 doc 的用户，并指定 API URL。
+          laf user switch doc  # 切换到名为 doc 的用户。
+          laf login ${{ env.LAF_CI_DOCS_PAT }}  # 使用 PAT 登录。
+
+      # 将构建好的文档推送到 Laf 平台中指定的存储桶中。
+      - name: Deploy to laf
+        working-directory: docs/.vitepress
+        run: |
+          laf app init ${{ env.LAF_CI_DOCS_APPID }}  # 初始化应用。
+          laf storage push -f ${{ env.LAF_CI_DOCS_BUCKET_NAME }} dist/  # 将 dist 目录下的文件推送到指定的存储桶中。
