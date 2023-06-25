@@ -29,7 +29,7 @@ jobs:
 
 
       - name: Run build
-        run: hugo --minify
+        run: hugo
 
       # 使用 laf-cli 工具初始化并登录到 Laf 平台。
       - name: Setup laf-cli
