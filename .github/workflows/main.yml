@@ -38,8 +38,7 @@ jobs:
       - name: Run build
         uses: peaceiris/actions-hugo@v2
         with:
-         cmd: hugo --minify
-         args: --gc --minify --cleanDestinationDir
+         cmd: hugo 
 
       # 使用 laf-cli 工具初始化并登录到 Laf 平台。
       - name: Setup laf-cli
