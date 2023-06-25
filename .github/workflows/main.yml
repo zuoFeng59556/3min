@@ -34,13 +34,16 @@ jobs:
       - name: Run build
         run: hugo
 
+      - name: tree
+        run: tree public
+
       # 使用 laf-cli 工具初始化并登录到 Laf 平台。
       - name: Setup laf-cli
         run: npm i laf-cli -g  # 安装 laf-cli。
 
       # 添加用户、切换用户和使用 PAT 登录。
       - name: Login laf-cli
-        run: | 
+        run: |
           laf user add doc -r ${{ env.LAF_API_URL }}  # 添加名为 doc 的用户，并指定 API URL。
           laf user switch doc  # 切换到名为 doc 的用户。
           laf login ${{ env.LAF_CI_DOCS_PAT }}  # 使用 PAT 登录。
