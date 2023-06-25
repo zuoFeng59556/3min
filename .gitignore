@@ -1,2 +1,9 @@
 public/
+<<<<<<< HEAD
 .DS_Store
+=======
+.idea/
+.hugo_build.lock
+**/.DS_Store
+.DS_Store
+>>>>>>> 8fd65a1a8b58e2a49c53fe1c35084626e329789b
