@@ -22,19 +22,11 @@ jobs:
       # 复制仓库代码到 runner 上。
       - uses: actions/checkout@v3
 
-      # 设置 Node.js 16.x 版本。
-      - name: Set Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-
-      # 在 docs 目录下安装所有依赖项。
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          cmd: 'latest' # 将在 docs 目录下运行 yarn install 命令。
+          cmd: 'latest' 
 
-      # 在 docs 目录下构建文档网站。
       - name: Run build
         uses: peaceiris/actions-hugo@v2
         with:
@@ -53,7 +45,6 @@ jobs:
 
       # 将构建好的文档推送到 Laf 平台中指定的存储桶中。
       - name: Deploy to laf
-        working-directory: ''
         run: |
           laf app init ${{ env.LAF_CI_DOCS_APPID }}  # 初始化应用。
           laf storage push -f ${{ env.LAF_CI_DOCS_BUCKET_NAME }} public/  # 将 dist 目录下的文件推送到指定的存储桶中。
